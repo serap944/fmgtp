@@ -12,15 +12,6 @@ body {
     line-height: 1.6;
 }
 
-.ustbilgi {
-    display: inline-flex;
-    width: 100%;
-    padding: 10px;
-    background-color: #2c3e50;
-    color: white;
-    z-index: 1002;
-
-}
 
 
 .header {
@@ -33,6 +24,16 @@ body {
     background-color: #2c3e50;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+}
+
+.ustbilgi {
+    display: inline-flex;
+    width: 100%;
+    padding: 10px;
+    background-color: #2c3e50;
+    color: white;
+
+
 }
 
 .header-container {
@@ -201,7 +202,92 @@ body {
     left: -60px;
 }
 
+
 .hamburger.active span:nth-child(3) {
     top: 10px;
     transform: rotate(-135deg);
+}
+
+
+
+/* Mobil Görünüm */
+@media screen and (max-width: 768px) {
+    .ustbilgi {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: #2c3e50;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 20px;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-item {
+        margin: 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link {
+        font-size: 18px;
+        padding: 15px 0;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* Mobil Alt Menü */
+    .dropdown-menu {
+        position: static;
+        background-color: rgba(0, 0, 0, 0.2);
+        box-shadow: none;
+        min-width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        margin-top: 10px;
+        border-radius: 4px;
+    }
+
+    .dropdown-menu.active {
+        max-height: 300px;
+    }
+
+    .dropdown-menu li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown-menu a {
+        color: rgba(255, 255, 255, 0.8);
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        padding-left: 25px;
+    }
+
+    .nav-item:hover .dropdown-menu {
+        transform: none;
+    }
 }
