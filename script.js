@@ -49,6 +49,8 @@ window.addEventListener('resize', () => {
     }
 });
 
+
+// Banner değişkenleri
 const resimler = [
     "images/banner1.jpg",
     "images/banner2.jpg",
@@ -65,16 +67,21 @@ const cumleler = [
 ];
 
 let sira = 0;
+let bannerInterval;
 
 const banner = document.querySelector(".banner");
 const bannerYazi = document.getElementById("banner-yazi");
 
 function yazigecis() {
+    if (!bannerYazi) return;
+
     bannerYazi.style.opacity = 0;
 
     setTimeout(() => {
         sira = (sira + 1) % resimler.length;
-        banner.style.backgroundImage = `url("${resimler[sira]}")`;
+        if (banner) {
+            banner.style.backgroundImage = `url("${resimler[sira]}")`;
+        }
         bannerYazi.textContent = cumleler[sira];
         bannerYazi.style.opacity = 1;
     }, 800);
@@ -82,8 +89,24 @@ function yazigecis() {
 
 // Sayfa yüklendiğinde çalıştır
 document.addEventListener('DOMContentLoaded', function () {
-    // İlk geçişi 4 saniye sonra başlat
-    setTimeout(() => {
-        setInterval(yazigecis, 4000);
-    }, 4000);
+    // Banner elementleri kontrolü
+    if (banner && bannerYazi) {
+        // İlk geçişi 4 saniye sonra başlat
+        setTimeout(() => {
+            bannerInterval = setInterval(yazigecis, 4000);
+        }, 4000);
+    }
+
+    // Sayfa görünürlüğü değiştiğinde interval'i kontrol et
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            clearInterval(bannerInterval);
+        } else {
+            // Sayfa görünür olduğunda interval'i tekrar başlat
+            if (banner && bannerYazi) {
+                clearInterval(bannerInterval);
+                bannerInterval = setInterval(yazigecis, 4000);
+            }
+        }
+    });
 });
