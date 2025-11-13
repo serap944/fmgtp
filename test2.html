@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asfalt Çözümleri</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .banner {
+            background-image: url('images/banner5.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .banner-text {
+            z-index: 2;
+            position: relative;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .banner-text h1 {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            transition: opacity 0.8s ease;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .btn {
+            background: #f1c40f;
+            color: #2c3e50;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            z-index: 2;
+            position: relative;
+        }
+
+        .btn:hover {
+            background: #f39c12;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive tasarım */
+        @media (max-width: 768px) {
+            .banner-text h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="banner" id="anasayfa">
+        <div class="banner-text">
+            <h1 id="banner-yazi">Dayanıklı ve Uzun Ömürlü Asfalt Çözümleri</h1>
+            <a href="#iletisim" class="btn">Teklif Al</a>
+        </div>
+    </section>
+
+    <script>
+        const resimler = [
+            "images/banner1.jpg",
+            "images/banner2.jpg",
+            "images/banner3.jpg",
+            "images/banner4.jpg",
+            "images/banner5.jpg"
+        ];
+        const cumleler = [
+            "Dayanıklı ve Uzun Ömürlü Asfalt Çözümleri",
+            "Modern Ekipmanlarla Kaliteli Uygulama",
+            "Yollarınıza Değer Katıyoruz",
+            "Her projede sağlamlık, estetik ve mühendislik kalitesini bir araya getiriyoruz.",
+            "İş ortaklarımızın memnuniyeti en önemli sütunumuzdur"
+        ];
+
+        let sira = 0;
+        const banner = document.querySelector(".banner");
+        const bannerYazi = document.getElementById("banner-yazi");
+
+        function yazigecis() {
+            bannerYazi.style.opacity = 0;
+
+            setTimeout(() => {
+                sira = (sira + 1) % resimler.length;
+                banner.style.backgroundImage = `url("${resimler[sira]}")`;
+                bannerYazi.textContent = cumleler[sira];
+                bannerYazi.style.opacity = 1;
+            }, 800);
+        }
+
+        // Sayfa yüklendiğinde çalıştır
+        document.addEventListener('DOMContentLoaded', function () {
+            // İlk geçişi 4 saniye sonra başlat
+            setTimeout(() => {
+                setInterval(yazigecis, 4000);
+            }, 4000);
+        });
+    </script>
+</body>
+
+</html>

@@ -48,3 +48,42 @@ window.addEventListener('resize', () => {
         icon.classList.add('fa-chevron-down');
     }
 });
+
+const resimler = [
+    "images/banner1.jpg",
+    "images/banner2.jpg",
+    "images/banner3.jpg",
+    "images/banner4.jpg",
+    "images/banner5.jpg"
+];
+const cumleler = [
+    "Dayanıklı ve Uzun Ömürlü Asfalt Çözümleri",
+    "Modern Ekipmanlarla Kaliteli Uygulama",
+    "Yollarınıza Değer Katıyoruz",
+    "Her projede sağlamlık, estetik ve mühendislik kalitesini bir araya getiriyoruz.",
+    "İş ortaklarımızın memnuniyeti en önemli sütunumuzdur"
+];
+
+let sira = 0;
+
+const banner = document.querySelector(".banner");
+const bannerYazi = document.getElementById("banner-yazi");
+
+function yazigecis() {
+    bannerYazi.style.opacity = 0;
+
+    setTimeout(() => {
+        sira = (sira + 1) % resimler.length;
+        banner.style.backgroundImage = `url("${resimler[sira]}")`;
+        bannerYazi.textContent = cumleler[sira];
+        bannerYazi.style.opacity = 1;
+    }, 800);
+}
+
+// Sayfa yüklendiğinde çalıştır
+document.addEventListener('DOMContentLoaded', function () {
+    // İlk geçişi 4 saniye sonra başlat
+    setTimeout(() => {
+        setInterval(yazigecis, 4000);
+    }, 4000);
+});

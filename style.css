@@ -21,9 +21,10 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #2c3e50;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #060077;
+    box-shadow: 7px 7px 15px rgba(27, 0, 228, 0.6);
     z-index: 1000;
+    height: 130px
 }
 
 .ustbilgi {
@@ -31,7 +32,7 @@ body {
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-    background-color: black;
+    background: #daae01;
     color: white;
 
 
@@ -40,7 +41,7 @@ body {
 .header-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     padding: 0 20px;
     max-width: 1200px;
 
@@ -210,6 +211,132 @@ body {
     transform: rotate(-135deg);
 }
 
+.banner {
+    background-image: url('images/banner5.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+    max-height: 85vh;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    margin-top: 30px;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.banner-text {
+    z-index: 2;
+    position: relative;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.banner-text h1 {
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    transition: opacity 0.8s ease;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.btn {
+    background: #f1c40f;
+    color: #2c3e50;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+    z-index: 2;
+    position: relative;
+}
+
+.btn:hover {
+    background: #f39c12;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.anaicerik {
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px;
+    /* Menü çubuğu yüksekliği kadar boşluk bırak */
+
+    margin: 1rem;
+
+
+}
+
+.kutu1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgb(0, 50, 158);
+    margin-bottom: 2rem;
+
+}
+
+.kutu1 .sol {
+    flex: 1;
+    padding-right: 1rem;
+
+
+}
+
+.kutu1 .sag {
+    flex: 0 0 300px;
+    max-width: 300px;
+    overflow: hidden;
+}
+
+.kutu1 .sag img {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+
+}
+
+.yuvarlak {
+    border-radius: 50%;
+}
+
+.kare {
+    border-radius: 8px;
+}
+
+.kutu1 h2 {
+    margin-bottom: 0.5rem;
+    color: #060077;
+}
+
+.kutu1 p {
+    line-height: 1.6;
+    color: #333;
+}
+
+.kutu1 .sol p {
+    margin-bottom: 1rem;
+}
+
 
 
 /* Mobil Görünüm */
@@ -298,5 +425,9 @@ body {
 
     .nav-item:hover .dropdown-menu {
         transform: none;
+    }
+
+    .banner-text h1 {
+        font-size: 1.8em;
     }
 }
