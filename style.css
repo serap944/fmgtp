@@ -28,10 +28,10 @@ body {
 
 .ustbilgi {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     padding: 10px;
-    background-color: #2c3e50;
+    background-color: black;
     color: white;
 
 
@@ -43,7 +43,7 @@ body {
     align-items: center;
     padding: 0 20px;
     max-width: 1200px;
-    margin: 0 auto;
+
     height: 80px;
 }
 
@@ -163,6 +163,7 @@ body {
     cursor: pointer;
     background: none;
     border: none;
+    margin-right: 0;
     width: 30px;
     height: 24px;
     position: relative;
@@ -213,19 +214,26 @@ body {
 
 /* Mobil Görünüm */
 @media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
+
     .ustbilgi {
         display: none;
     }
 
+
     .hamburger {
         display: block;
+        margin-right: 0;
+        margin-left: auto;
     }
 
     .nav-menu {
         position: fixed;
         top: 80px;
-        left: -100%;
-        width: 100%;
+        right: 1000%;
+        width: 80%;
         height: calc(100vh - 80px);
         background-color: #2c3e50;
         flex-direction: column;
@@ -236,7 +244,7 @@ body {
     }
 
     .nav-menu.active {
-        left: 0;
+        right: 0;
     }
 
     .nav-item {
