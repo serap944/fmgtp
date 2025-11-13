@@ -277,46 +277,59 @@ body {
     display: flex;
     flex-direction: column;
     padding-top: 60px;
-    /* Menü çubuğu yüksekliği kadar boşluk bırak */
-
     margin: 1rem;
-
-
+    gap: 2rem;
+    /* Kutular arası boşluk için modern yöntem */
 }
 
 .kutu1 {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
+    align-items: flex-start;
+    /* center yerine flex-start daha iyi */
+    padding: 2rem;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgb(0, 50, 158);
-    margin-bottom: 2rem;
-
+    box-shadow: 0 4px 6px rgba(0, 50, 158, 0.1);
+    /* Daha hafif gölge */
+    border-radius: 8px;
+    /* Köşe yuvarlama */
+    gap: 2rem;
+    /* İç boşluk */
 }
 
-.kutu1 .sol {
+.sol {
     flex: 1;
-    padding-right: 1rem;
-
-
+    /* Esnek genişlik */
+    padding: 0;
+    min-width: 0;
+    /* Flexbox'ta taşmayı önler */
 }
 
-.kutu1 .sag {
-    flex: 0 0 300px;
-    max-width: 300px;
-    overflow: hidden;
+.sag {
+    flex: 0 0 45%;
+    /* %45 sabit genişlik */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
 }
 
 .kutu1 .sag img {
     width: 100%;
     height: auto;
-    max-height: 350px;
-
+    max-height: 400px;
+    /* min-height yerine max-height */
+    object-fit: cover;
+    /* Resim oranlarını korur */
+    border-radius: 8px;
+    /* Varsayılan köşe yuvarlama */
 }
 
+/* Özel şekil sınıfları */
 .yuvarlak {
     border-radius: 50%;
+    aspect-ratio: 1;
+    /* Daire için en-boy oranı */
 }
 
 .kare {
@@ -324,16 +337,15 @@ body {
 }
 
 .kutu1 h2 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     color: #060077;
+    font-size: 1.5rem;
 }
 
 .kutu1 p {
-    line-height: 1.6;
+    line-height: 1.7;
+    /* Daha okunaklı */
     color: #333;
-}
-
-.kutu1 .sol p {
     margin-bottom: 1rem;
 }
 
