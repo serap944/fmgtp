@@ -21,7 +21,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #060077;
+
     box-shadow: 7px 7px 15px rgba(27, 0, 228, 0.6);
     z-index: 1000;
     height: 130px
@@ -32,7 +32,7 @@ body {
     justify-content: space-between;
     width: 100%;
     padding: 10px;
-    background: #daae01;
+    background-color: #060077;
     color: white;
 
 
@@ -225,18 +225,25 @@ body {
     text-align: center;
     color: white;
     position: relative;
+    /* önemli */
     margin-top: 30px;
 }
 
+/* KARARTMA (Overlay) */
 .banner::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    inset: 0;
+    /* tüm bannerı kapla */
+    background: rgba(0, 0, 0, 0.35);
+    /* 0.35 = hafif kararma, arttırılabilir */
     z-index: 1;
+}
+
+/* İçerik overlay'in üstünde kalsın */
+.banner * {
+    position: relative;
+    z-index: 2;
 }
 
 .banner-text {
@@ -442,4 +449,69 @@ body {
     .banner-text h1 {
         font-size: 1.8em;
     }
+}
+
+
+
+
+.kutu2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+
+    background-color: #fff;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    flex-wrap: wrap;
+    overflow-y: auto;
+
+}
+
+.kart {
+    background-color: #f0f0f0;
+
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.kart img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.kart h3 {
+    margin-bottom: 0.5rem;
+    color: #060077;
+}
+
+.kart p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-top: 10px;
+}
+
+.kart .btn {
+    display: inline-block;
+    margin: 1rem 0 1.5rem 0;
+    padding: 8px 16px;
+    background-color: #060077;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.kart .btn:hover {
+    background-color: #040147;
+}
+
+.kart:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
 }
