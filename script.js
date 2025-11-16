@@ -54,7 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-    // Banner değişkenleri
+    // Banner slaytı
+    let sira = 0;
+    const banner = document.querySelector(".banner");
+    const bannerYazi = document.getElementById("banner-yazi");
     const resimler = [
         "images/banner1.jpg",
         "images/banner2.jpg",
@@ -70,45 +73,28 @@ document.addEventListener('DOMContentLoaded', function () {
         "İş ortaklarımızın memnuniyeti en önemli sütunumuzdur"
     ];
 
-    let sira = 0;
-    let bannerInterval;
-
-    const banner = document.querySelector(".banner");
-    const bannerYazi = document.getElementById("banner-yazi");
-
     function yazigecis() {
-        if (!bannerYazi) return;
+        if (!bannerYazi || !banner) return;
 
         bannerYazi.style.opacity = 0;
 
         setTimeout(() => {
             sira = (sira + 1) % resimler.length;
-            if (banner) {
-                banner.style.backgroundImage = `url("${resimler[sira]}")`;
-            }
+            banner.style.backgroundImage = `url("${resimler[sira]}")`;
             bannerYazi.textContent = cumleler[sira];
             bannerYazi.style.opacity = 1;
         }, 800);
     }
 
-    // Banner elementleri kontrolü
+    // Banner başlatma (DOMContentLoaded içinde tekrar etmiyoruz)
     if (banner && bannerYazi) {
+        // İlk görsel ve yazıyı ayarla
+        banner.style.backgroundImage = `url("${resimler[0]}")`;
+        bannerYazi.textContent = cumleler[0];
+
         // İlk geçişi 4 saniye sonra başlat
         setTimeout(() => {
-            bannerInterval = setInterval(yazigecis, 4000);
-        }, 4000);
+            setInterval(yazigecis, 4000);
+        }, 3000);
     }
-
-    // Sayfa görünürlüğü değiştiğinde interval'i kontrol et
-    document.addEventListener('visibilitychange', function () {
-        if (document.hidden) {
-            clearInterval(bannerInterval);
-        } else {
-            // Sayfa görünür olduğunda interval'i tekrar başlat
-            if (banner && bannerYazi) {
-                clearInterval(bannerInterval);
-                bannerInterval = setInterval(yazigecis, 4000);
-            }
-        }
-    });
 });
