@@ -602,6 +602,7 @@ body {
 @media screen and (max-width: 768px) {
     .header {
         flex-direction: column;
+      
     }
 
     .ustbilgi {
@@ -684,6 +685,9 @@ body {
 
     .nav-item:hover .dropdown-menu {
         transform: none;
+    }
+    .banner{
+          height:50vh;
     }
 
     .banner-text h1 {
