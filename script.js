@@ -1,5 +1,21 @@
+// script.js - ANA DOSYA
+
+// DOĞRU IMPORT (./ eklemeyi unutma!)
+import initMenu from './menu.js';
+
 // Sayfa yüklendiğinde çalıştır
 document.addEventListener('DOMContentLoaded', function () {
+
+    // HEADER'I YÜKLE VE MENÜYÜ BAŞLAT (BANNER'DEN ÖNCE EKLE)
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+            // Header yüklendikten sonra menüyü başlat
+            setTimeout(initMenu, 50);
+        })
+        .catch(error => console.error('Header yüklenemedi:', error));
+
     // --- BANNER SCRIPT BAŞLANGICI ---
     let sira = 0;
     const banner = document.querySelector(".banner");
@@ -45,80 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // --- BANNER SCRIPT SONU ---
 
-    // --- MENÜ SCRIPT BAŞLANGICI ---
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    const servicesDropdown = document.getElementById('services-dropdown');
-    const servicesLink = document.querySelector('.nav-item:nth-child(3) .nav-link');
-
-    // Hamburger menü aç/kapa
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-    }
-
-    // Mobilde Hizmetler alt menüsünü aç/kapa
-    if (servicesLink && servicesDropdown) {
-        servicesLink.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                servicesDropdown.classList.toggle('active');
-
-                // Alt menü ikonunu değiştir
-                const icon = servicesLink.querySelector('i');
-                if (servicesDropdown.classList.contains('active')) {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
-                } else {
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
-                }
-            }
-        });
-    }
-
-    // Menü dışına tıklandığında menüyü kapat
-    document.addEventListener('click', (e) => {
-        if (hamburger && navMenu) {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                // Mobilde services dropdown'ı da kapat
-                if (servicesDropdown && window.innerWidth <= 768) {
-                    servicesDropdown.classList.remove('active');
-                    // İkonu eski haline getir
-                    if (servicesLink) {
-                        const icon = servicesLink.querySelector('i');
-                        icon.classList.remove('fa-chevron-up');
-                        icon.classList.add('fa-chevron-down');
-                    }
-                }
-            }
-        }
-    });
-
-    // Ekran boyutu değiştiğinde menüyü sıfırla
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            if (hamburger && navMenu) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-            if (servicesDropdown) {
-                servicesDropdown.classList.remove('active');
-            }
-
-            // İkonu eski haline getir
-            if (servicesLink) {
-                const icon = servicesLink.querySelector('i');
-                icon.classList.remove('fa-chevron-up');
-                icon.classList.add('fa-chevron-down');
-            }
-        }
-    });
-    // --- MENÜ SCRIPT SONU ---
+    // SLAYT GEÇİŞİ BAŞLANGIÇ--
 
 
     // SLAYT GEÇİŞİ BAŞLANGIÇ--
@@ -291,12 +234,10 @@ document.addEventListener('DOMContentLoaded', function () {
     updateSlider();
     // --SLAYT GEÇİŞ SONU
 
-
-
+    // --SLAYT GEÇİŞ SONU
 });
 
 // Sayfa tamamen yüklendiğinde çalışacak ekstra fonksiyonlar
 window.addEventListener('load', function () {
-    // İsteğe bağlı: Sayfa tam yüklendikten sonra çalışacak kodlar
     console.log('Sayfa tamamen yüklendi');
 });
