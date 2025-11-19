@@ -335,12 +335,11 @@
 }
 
 
-<<<<<<< HEAD
 /* Mobil Görünüm */
 @media screen and (max-width: 768px) {
     .header {
         flex-direction: column;
-      
+
     }
 
     .ustbilgi {
@@ -424,16 +423,15 @@
     .nav-item:hover .dropdown-menu {
         transform: none;
     }
-    .banner{
-          height:50vh;
+
+    .banner {
+        height: 50vh;
     }
 
     .banner-text h1 {
         font-size: 1.8em;
     }
 }
-=======
->>>>>>> 802b573 (Yerel değişiklikler birleştirildi)
 
 .kutu3 {
     max-width: 1200px;
@@ -1003,7 +1001,6 @@
 
 .slaytgecisi {
     animation: fadeIn 0.8s ease-out;
-<<<<<<< HEAD
 }
 
 /* Footer Stilleri */
@@ -1223,6 +1220,3 @@ footer {
 .footer-section:nth-child(4) {
     animation-delay: 0.3s;
 }
-=======
-}
->>>>>>> 802b573 (Yerel değişiklikler birleştirildi)
