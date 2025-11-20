@@ -1,25 +1,23 @@
 // --- BANNER SCRIPT ---
-// Bu dosya banner görüntüsünün ve yazısının otomatik olarak değişmesini sağlar.
+// Bu dosya banner arkaplan resimlerini ve yazılarını otomatik olarak değiştirir
+// ve sayfa açıldığında resimlerin geç yüklenme sorununu önlemek için preload kullanır.
 
-// Kaçıncı sıranın gösterildiğini tutar
-let sira = 0;
+let sira = 0;          // Şu anda gösterilen resmin/yazının sıra numarası
+let intervalID;         // setInterval ID'si — gerekirse durdurmak için
 
-// setInterval id'si — gerekirse durdurmak için
-let intervalID;
-
-// Bu dosyayı dışarı aktarıyoruz, script.js içinden çağırılacak
+// Bu fonksiyon script.js tarafından çağrılacak
 export default function initBanner() {
 
-    // Banner divini seç (arkaplan resmini değiştiriyoruz)
+    // Banner divini seçiyoruz (arkaplan resmi bu div üzerinden değişecek)
     const banner = document.querySelector(".banner");
 
-    // Banner yazısını seç (değişen slogan buraya yazılacak)
+    // Banner yazısı elementini seçiyoruz (slogan burada gösterilecek)
     const bannerYazi = document.getElementById("banner-yazi");
 
-    // Eğer banner veya yazı bulunamazsa çalışmayı durdur (hata engelleme)
+    // Eğer banner veya yazı elementleri yoksa fonksiyon çalışmayı durdurur
     if (!banner || !bannerYazi) return;
 
-    // Değişecek banner resimleri
+    // Banner'da kullanılacak resim dosyaları
     const resimler = [
         "images/banner1.jpg",
         "images/banner2.jpg",
@@ -28,7 +26,7 @@ export default function initBanner() {
         "images/banner5.jpg"
     ];
 
-    // Resimlerle eş zamanlı değişecek cümleler
+    // Resimlerle eş zamanlı değişecek sloganlar
     const cumleler = [
         "Dayanıklı ve Uzun Ömürlü Asfalt Çözümleri",
         "Modern Ekipmanlarla Kaliteli Uygulama",
@@ -37,35 +35,47 @@ export default function initBanner() {
         "İş ortaklarımızın memnuniyeti en önemli sütunumuzdur"
     ];
 
-    // SAYFA AÇILDIĞINDA İLK RESİM VE YAZIYI AYARLA
-    banner.style.backgroundImage = `url("${resimler[0]}")`;
-    bannerYazi.textContent = cumleler[0];
+    /* =====================================================
+       📌 ÖN YÜKLEME (PRELOAD)
+       Tarayıcıya resimleri önceden belleğe aldırıyoruz
+       Böylece sayfa açıldığında resimler hemen görünür
+    ===================================================== */
+    resimler.forEach(src => {
+        const img = new Image(); // yeni img objesi oluştur
+        img.src = src;            // tarayıcı belleğe alır (ön yükleme)
+    });
 
-    // --- RESİM + YAZI GEÇİŞ FONKSİYONU ---
+    /* =====================================================
+       📌 SAYFA AÇILIR AÇILMAZ İLK GÖRÜNTÜYÜ GÖSTER
+    ===================================================== */
+    banner.style.backgroundImage = `url("${resimler[0]}")`;  // ilk resim
+    bannerYazi.textContent = cumleler[0];                     // ilk slogan
+
+    /* =====================================================
+       📌 RESİM + YAZI GEÇİŞ FONKSİYONU
+       Her geçişte:
+       1. Yazı önce kaybolur (opacity = 0)
+       2. 700ms sonra resim ve yazı değişir
+       3. Yazı tekrar görünür (fade in)
+    ===================================================== */
     function degistir() {
 
-        // Yazıyı görünmez yap — yumuşak geçiş efekti
-        bannerYazi.style.opacity = 0;
+        bannerYazi.style.opacity = 0; // yazıyı görünmez yap
 
-        // 700ms sonra resim ve yazıyı değiştir
         setTimeout(() => {
 
-            // Bir sonraki sıraya geç, sonuncudan sonra başa dön
-            sira = (sira + 1) % resimler.length;
+            sira = (sira + 1) % resimler.length; // sırayı artır, sonrasında başa dön
 
-            // Arkaplan resmini değiştir
-            banner.style.backgroundImage = `url("${resimler[sira]}")`;
+            banner.style.backgroundImage = `url("${resimler[sira]}")`; // arkaplan resmi değiştir
+            bannerYazi.textContent = cumleler[sira];                     // slogan değiştir
+            bannerYazi.style.opacity = 1;                                // yazıyı görünür yap
 
-            // Yazıyı değiştir
-            bannerYazi.textContent = cumleler[sira];
-
-            // Yazıyı görünür yap — fade in
-            bannerYazi.style.opacity = 1;
-
-        }, 700);
+        }, 700); // 700ms fade efekti
     }
 
-    // --- OTOMATİK DEĞİŞİM ---
-    // degistir() her 4 saniyede bir çalışacak
+    /* =====================================================
+       📌 OTOMATİK GEÇİŞ
+       4 saniyede bir degistir() fonksiyonu çalışır
+    ===================================================== */
     intervalID = setInterval(degistir, 4000);
 }
